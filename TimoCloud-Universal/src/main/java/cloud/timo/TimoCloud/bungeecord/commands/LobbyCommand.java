@@ -21,6 +21,8 @@ public class LobbyCommand extends Command {
         }
         ProxiedPlayer player = (ProxiedPlayer) sender;
         ServerInfo serverInfo = TimoCloudBungee.getInstance().getLobbyManager().searchFreeLobby(player.getUniqueId(), player.getServer().getInfo());
-        if (serverInfo != null) player.connect(serverInfo);
+        if (serverInfo != null)
+            player.connect(serverInfo);
+            BungeeMessageManager.sendMessage(sender,TimoCloudBungee.getInstance().getFileManager().getConfig().getString("LobbyCommandMessage"));
     }
 }

@@ -3,6 +3,7 @@ fallbackGroup: 'Lobby'
 useFallback: true
 emergencyFallback: 'Economy'
 LobbyChooseStrategy: "RANDOM"
+LobbyCommandMessage: 'Successful connected to a Lobby server'
 lobbyCommands:
 - lobby
 - hub
