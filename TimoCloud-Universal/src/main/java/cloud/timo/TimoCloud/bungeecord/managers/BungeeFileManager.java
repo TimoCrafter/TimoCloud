@@ -21,6 +21,8 @@ public class BungeeFileManager {
     private String configsDirectory = pluginsDirectory + "configs/";
     private File configFile;
     private Configuration config;
+    private File messagesFile;
+    private Configuration messages;
 
     public BungeeFileManager() {
         load();
@@ -30,7 +32,6 @@ public class BungeeFileManager {
         try {
             File configs = new File(configsDirectory);
             configs.mkdirs();
-
             configFile = new File(configsDirectory, "config.yml");
             if (!configFile.exists()) {
                 configFile.createNewFile();
@@ -42,9 +43,15 @@ public class BungeeFileManager {
             for (String key : config.getKeys()) {
                 configNew.set(key, config.get(key));
             }
+            Files.copy(this.getClass().getResourceAsStream("/bungeecord/messages.yml"), configFile.toPath());
+            Configuration messagesNew = ConfigurationProvider.getProvider(YamlConfiguration.class).load(messagesFile);
+            for (String key : messages.getKeys()) {
+                messagesNew.set(key, messages.get(key));
+            }
             ConfigurationProvider.getProvider(YamlConfiguration.class).save(configNew, configFile);
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
-
+            ConfigurationProvider.getProvider(YamlConfiguration.class).save(messagesNew, messagesFile);
+            messages = ConfigurationProvider.getProvider(YamlConfiguration.class).load(messagesFile);
             TimoCloudBungee.getInstance().setPrefix(ChatColor.translateAlternateColorCodes('&', config.getString("prefix") + " "));
         } catch (Exception e) {
             TimoCloudBungee.getInstance().severe("Exception while initializing files:");
@@ -78,6 +85,14 @@ public class BungeeFileManager {
 
     public Configuration getConfig() {
         return config;
+    }
+
+    public File getMessagesFile() {
+        return messagesFile;
+    }
+
+    public Configuration getMessages() {
+        return messages;
     }
 
 }
