@@ -1,2 +1,2 @@
-LobbyConnect: '&aSuccessfully connected to a Lobby server'
+LobbyConnect: '&7Successfully connected to &b{server_name}'
 NoFreeLobbyFound: '&cNo Lobby server found!'
