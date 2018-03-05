@@ -26,10 +26,6 @@ public class LobbyCommand extends Command {
             BungeeMessageManager.sendMessage(sender, TimoCloudBungee.getInstance().getFileManager().getMessages().getString("NoFreeLobbyFound"));
             return;
         }
-        if (player.getServer().getInfo().getName().equalsIgnoreCase(TimoCloudAPI.getUniversalInstance().getServerGroup("Lobby").getServers().toString())) {
-            BungeeMessageManager.sendMessage(sender, TimoCloudBungee.getInstance().getFileManager().getMessages().getString("AlreadyConnectedToLobby"));
-            return;
-        }
         player.connect(serverInfo);
         BungeeMessageManager.sendMessage(sender, TimoCloudBungee.getInstance().getFileManager().getConfig().getString("LobbyConnect"));
     }
