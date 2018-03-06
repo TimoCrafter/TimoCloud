@@ -32,6 +32,8 @@ public class BungeeFileManager {
         try {
             File configs = new File(configsDirectory);
             configs.mkdirs();
+
+            //Load configFile
             configFile = new File(configsDirectory, "config.yml");
             if (!configFile.exists()) {
                 configFile.createNewFile();
@@ -43,15 +45,24 @@ public class BungeeFileManager {
             for (String key : config.getKeys()) {
                 configNew.set(key, config.get(key));
             }
-            Files.copy(this.getClass().getResourceAsStream("/bungeecord/messages.yml"), configFile.toPath());
+            ConfigurationProvider.getProvider(YamlConfiguration.class).save(configNew, configFile);
+            config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
+
+            //Load messagesFile
+            messagesFile = new File(configsDirectory, "messages.yml");
+            if (!messagesFile.exists()) {
+                messagesFile.createNewFile();
+            }
+            messages = ConfigurationProvider.getProvider(YamlConfiguration.class).load(messagesFile);
+            messagesFile.delete();
+            Files.copy(this.getClass().getResourceAsStream("/bungeecord/messages.yml"), messagesFile.toPath());
             Configuration messagesNew = ConfigurationProvider.getProvider(YamlConfiguration.class).load(messagesFile);
             for (String key : messages.getKeys()) {
                 messagesNew.set(key, messages.get(key));
             }
-            ConfigurationProvider.getProvider(YamlConfiguration.class).save(configNew, configFile);
-            config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(configFile);
             ConfigurationProvider.getProvider(YamlConfiguration.class).save(messagesNew, messagesFile);
             messages = ConfigurationProvider.getProvider(YamlConfiguration.class).load(messagesFile);
+
             TimoCloudBungee.getInstance().setPrefix(ChatColor.translateAlternateColorCodes('&', config.getString("prefix") + " "));
         } catch (Exception e) {
             TimoCloudBungee.getInstance().severe("Exception while initializing files:");
@@ -94,5 +105,4 @@ public class BungeeFileManager {
     public Configuration getMessages() {
         return messages;
     }
-
 }

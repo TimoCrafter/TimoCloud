@@ -27,7 +27,7 @@ public class LobbyCommand extends Command {
             return;
         }
         player.connect(serverInfo);
-        BungeeMessageManager.sendMessage(sender, TimoCloudBungee.getInstance().getFileManager().getConfig().getString("LobbyConnect")
+        BungeeMessageManager.sendMessage(sender, TimoCloudBungee.getInstance().getFileManager().getMessages().getString("LobbyConnect")
                 .replace("{server_name}", serverInfo.getName()));
     }
 }
