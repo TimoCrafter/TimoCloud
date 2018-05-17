@@ -475,7 +475,14 @@ public class BaseServerManager {
             }
         }
         */
-        deleteDirectory(directory);
+        new Thread(() -> {
+            try {
+                wait(1000 * 60);
+                deleteDirectory(directory);  
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     public void onProxyStopped(String name, String token) {
