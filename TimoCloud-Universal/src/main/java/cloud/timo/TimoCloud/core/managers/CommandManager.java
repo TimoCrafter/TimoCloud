@@ -39,7 +39,7 @@ public class CommandManager {
     }
 
     public void onCommand(Consumer<String> sendMessage, boolean local, String command) {
-        String[] split = command.split(" ");
+        String[] split = command.split("\\s+");
         if (split.length < 1) return;
         String cmd = split[0];
         String[] args = split.length == 1 ? new String[0] : Arrays.copyOfRange(split, 1, split.length);
