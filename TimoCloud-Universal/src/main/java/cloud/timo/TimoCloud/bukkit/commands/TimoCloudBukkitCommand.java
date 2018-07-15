@@ -21,11 +21,16 @@ public class TimoCloudBukkitCommand implements CommandExecutor {
             TimoCloudAPI.getBukkitAPI().getThisServer().setState(args[1]);
             BukkitMessageManager.sendMessage(sender, "&aState has successfully been set to &e" + args[1]);
         }
+        if (args[0].equalsIgnoreCase("setextra")) {
+            TimoCloudAPI.getBukkitAPI().getThisServer().setExtra(args[1]);
+            BukkitMessageManager.sendMessage(sender, "&aExtra has successfully been set to &e" + args[1]);
+        }
         return false;
     }
 
     private void sendHelp(CommandSender sender) {
         BukkitMessageManager.sendMessage(sender, "&6Available commands: ");
         BukkitMessageManager.sendMessage(sender, "&b/timocloudbukkit setState <state>");
+        BukkitMessageManager.sendMessage(sender, "&b/timocloudbukkit setExtra <extra>");
     }
 }
