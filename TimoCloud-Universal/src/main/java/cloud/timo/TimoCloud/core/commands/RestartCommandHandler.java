@@ -19,7 +19,9 @@ public class RestartCommandHandler implements CommandHandler {
 
         Server server = TimoCloudCore.getInstance().getInstanceManager().getServerByName(instance);
         Proxy proxy = TimoCloudCore.getInstance().getInstanceManager().getProxyByName(instance);
+        
         Base base = TimoCloudCore.getInstance().getInstanceManager().getBase(instance);
+        
         if (serverGroup == null && proxyGroup == null && server == null && proxy == null && base == null) {
             sender.sendError("Could not find any group, server, base or proxy with the name '" + instance + "'");
             return;
@@ -29,7 +31,7 @@ public class RestartCommandHandler implements CommandHandler {
         else if (proxyGroup != null) proxyGroup.stopAllProxies();
         else if (server != null) server.stop();
         else if (proxy != null) proxy.stop();
-        else if(base != null) {
+        else if (base != null) {
         	for(Server serverOnBase : base.getServers()) serverOnBase.stop();
         	for(Proxy proxyOnBase : base.getProxies()) proxyOnBase.stop();
         }
