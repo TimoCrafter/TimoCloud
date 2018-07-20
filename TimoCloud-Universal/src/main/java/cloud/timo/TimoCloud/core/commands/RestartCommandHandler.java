@@ -29,7 +29,10 @@ public class RestartCommandHandler implements CommandHandler {
         else if (proxyGroup != null) proxyGroup.stopAllProxies();
         else if (server != null) server.stop();
         else if (proxy != null) proxy.stop();
-        else if(base != null) for(Server serverOnBase : base.getServers()) serverOnBase.stop();
+        else if(base != null) {
+        	for(Server serverOnBase : base.getServers()) serverOnBase.stop();
+        	for(Proxy proxyOnBase : base.getProxies()) proxyOnBase.stop();
+        }
         sender.sendMessage("&2The group/server/proxy/base has successfully been stopped/restarted.");
     }
     
