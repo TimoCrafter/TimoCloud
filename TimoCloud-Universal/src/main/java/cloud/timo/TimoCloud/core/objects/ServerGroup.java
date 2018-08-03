@@ -42,7 +42,7 @@ public class ServerGroup implements Group {
                     (Boolean) properties.getOrDefault("static", false),
                     ((Number) properties.getOrDefault("priority", 1)).intValue(),
                     (String) properties.getOrDefault("base", null),
-                    (List<String>) properties.getOrDefault("sort-out-states", Arrays.asList("OFFLINE", "STARTING", "INGAME", "RESTARTING")));
+                    (List<String>) properties.getOrDefault("sort-out-states", Arrays.asList("OFFLINE", "WAITING", "STARTING", "FULL", "INGAME", "ENDING", "RESTARTING")));
         } catch (Exception e) {
             TimoCloudCore.getInstance().severe("Error while loading server group '" + properties.get("name") + "':");
             e.printStackTrace();
