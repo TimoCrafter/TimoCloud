@@ -192,11 +192,12 @@ public class BaseInstanceManager {
                 if (mapDirectory.exists()) copyDirectory(mapDirectory, temporaryDirectory);
             }
 
+            /*
             File spigotJar = new File(temporaryDirectory, "spigot.jar");
             if (!spigotJar.exists()) {
                 TimoCloudBase.getInstance().severe("Could not start server " + server.getName() + " because spigot.jar does not exist. Please make sure a the file " + spigotJar.getAbsolutePath() + " exists (case sensitive!). If not, DON'T create it there, but in the Core template!");
                 throw new ServerStartException("spigot.jar does not exist");
-            }
+            }*/
 
 
             File plugins = new File(temporaryDirectory, "/plugins/");
@@ -221,6 +222,8 @@ public class BaseInstanceManager {
             File serverProperties = new File(temporaryDirectory, "server.properties");
             setProperty(serverProperties, "online-mode", "false");
             setProperty(serverProperties, "server-name", server.getName());
+            setProperty(serverProperties, "allow-nether", "false");
+            setProperty(serverProperties, "announce-player-achievements", "false");
 
             double millisNow = System.currentTimeMillis();
             TimoCloudBase.getInstance().info("Successfully prepared starting server " + server.getName() + " in " + (millisNow - millisBefore) / 1000 + " seconds.");
@@ -241,7 +244,7 @@ public class BaseInstanceManager {
                             " -Dtimocloud-static=" + server.isStatic() +
                             " -Dtimocloud-templatedirectory=" + templateDirectory.getAbsolutePath() +
                             " -Dtimocloud-temporarydirectory=" + temporaryDirectory.getAbsolutePath() +
-                            " -jar spigot.jar -o false -h 0.0.0.0 -p " + port
+                            " -classpath \"/home/akardoo/paperclip.jar:/home/akardoo/lib/*\" com.destroystokyo.paperclip.Main -o false -h 0.0.0.0 -p " + port
             ).directory(temporaryDirectory);
             try {
                 Process p = pb.start();
@@ -315,11 +318,12 @@ public class BaseInstanceManager {
                 copyDirectory(templateDirectory, temporaryDirectory);
             }
 
+            /*
             File bungeeJar = new File(temporaryDirectory, "BungeeCord.jar");
             if (!bungeeJar.exists()) {
                 TimoCloudBase.getInstance().severe("Could not start proxy " + proxy.getName() + " because BungeeCord.jar does not exist. Please make sure a the file " + bungeeJar.getAbsolutePath() + " exists (case sensitive!). If not, DON'T create it there, but in the Core template!");
                 throw new ProxyStartException("BungeeCord.jar does not exist");
-            }
+            }*/
 
 
             File plugins = new File(temporaryDirectory, "/plugins/");
@@ -382,7 +386,7 @@ public class BaseInstanceManager {
                             " -Dtimocloud-static=" + proxy.isStatic() +
                             " -Dtimocloud-templatedirectory=" + templateDirectory.getAbsolutePath() +
                             " -Dtimocloud-temporarydirectory=" + temporaryDirectory.getAbsolutePath() +
-                            " -jar BungeeCord.jar"
+                            " -classpath \"/home/akardoo/Waterfall.jar:/home/akardoo/libs/*\" net.md_5.bungee.Bootstrap"
             ).directory(temporaryDirectory);
             try {
                 pb.start();
