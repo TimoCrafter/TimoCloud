@@ -10,5 +10,4 @@ public class StopCommandHandler implements CommandHandler {
         sender.sendMessage("Stopping TimoCloudCore...");
         System.exit(0);
     }
-
 }

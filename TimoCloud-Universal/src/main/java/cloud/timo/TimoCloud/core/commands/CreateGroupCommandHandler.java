@@ -15,9 +15,12 @@ public class CreateGroupCommandHandler extends CommandFormatUtil implements Comm
     
     @Override
     public void onCommand(String command, CommandSender sender, String... args) {
+        if(args.length < 5){
+            notEnoughArgs(sender, "addgroup <groupType (String)> <groupName (String)> <onlineAmount (int)> <ram (int)> <static (boolean)> <base (String), only needed if static=true>");
+            return;
+        }
         String type = args[0];
         String name = args[1];
-
         if (TimoCloudCore.getInstance().getInstanceManager().getGroupByName(name) != null) {
             sender.sendError("This group already exists.");
             return;
