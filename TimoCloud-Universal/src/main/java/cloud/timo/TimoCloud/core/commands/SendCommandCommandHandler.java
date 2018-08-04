@@ -13,7 +13,7 @@ public class SendCommandCommandHandler  extends CommandFormatUtil implements Com
 
     @Override
     public void onCommand(String command, CommandSender sender, String... args) {
-        if(args.length < 2){
+        if (args.length < 2) {
             notEnoughArgs(sender, "sendcommand <groupName | serverName | proxyName> <command>");
             return;
         }

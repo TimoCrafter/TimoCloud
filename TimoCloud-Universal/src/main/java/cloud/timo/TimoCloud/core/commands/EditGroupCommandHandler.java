@@ -12,9 +12,9 @@ public class EditGroupCommandHandler extends CommandFormatUtil implements Comman
 
     @Override
     public void onCommand(String command, CommandSender sender, String... args) {
-        if(args.length < 3){
+        if (args.length < 3) {
             notEnoughArgs(sender, "editgroup <name> <onlineAmount (int) | maxAmount (int) | base (String) | ram (int) | static (boolean) | priority (int)> <value>");
-            notEnoughArgs(sender,"editgroup <name> <playersPerProxy (int) | maxPlayers (int) | keepFreeSlots (int) | minAmount (int) | maxAmount (int) | base (String) | ram (int) | static (boolean) | priority (int)> <value>");
+            notEnoughArgs(sender, "editgroup <name> <playersPerProxy (int) | maxPlayers (int) | keepFreeSlots (int) | minAmount (int) | maxAmount (int) | base (String) | ram (int) | static (boolean) | priority (int)> <value>");
             return;
         }
         String groupName = args[0];
@@ -101,7 +101,7 @@ public class EditGroupCommandHandler extends CommandFormatUtil implements Comman
                     proxyGroup.setPriority(priority);
                     break;
                 default:
-                    invalidArgs(sender,"editgroup <name> <playersPerProxy (int) | maxPlayers (int) | keepFreeSlots (int) | minAmount (int) | maxAmount (int) | base (String) | ram (int) | static (boolean) | priority (int)> <value>");
+                    invalidArgs(sender, "editgroup <name> <playersPerProxy (int) | maxPlayers (int) | keepFreeSlots (int) | minAmount (int) | maxAmount (int) | base (String) | ram (int) | static (boolean) | priority (int)> <value>");
                     return;
             }
             TimoCloudCore.getInstance().getInstanceManager().saveProxyGroups();

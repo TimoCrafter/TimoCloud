@@ -10,7 +10,7 @@ public class BaseInfoCommandHandler extends CommandFormatUtil implements Command
 
     @Override
     public void onCommand(String command, CommandSender sender, String... args) {
-        if(args.length == 0){
+        if (args.length == 0) {
             notEnoughArgs(sender, "baseinfo <baseName>");
             return;
         }
@@ -21,4 +21,5 @@ public class BaseInfoCommandHandler extends CommandFormatUtil implements Command
         }
         displayBase(base, sender);
     }
+
 }
