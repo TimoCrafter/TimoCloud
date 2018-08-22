@@ -1,14 +1,16 @@
 package cloud.timo.TimoCloud.core.objects;
 
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import cloud.timo.TimoCloud.api.objects.ServerObject;
 import cloud.timo.TimoCloud.core.TimoCloudCore;
 import cloud.timo.TimoCloud.core.sockets.Communicatable;
 import cloud.timo.TimoCloud.lib.messages.Message;
 import io.netty.channel.Channel;
-
-import java.net.InetAddress;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class Base implements Communicatable {
 
@@ -173,4 +175,8 @@ public class Base implements Communicatable {
         if (! getProxies().contains(proxy)) return;
         getProxies().remove(proxy);
     }
+
+	public void stop() {
+		sendMessage(Message.create().setType("SHUTDOWN"));
+	}
 }

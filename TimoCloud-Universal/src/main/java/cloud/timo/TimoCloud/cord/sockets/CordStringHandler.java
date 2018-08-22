@@ -7,6 +7,7 @@ import cloud.timo.TimoCloud.api.implementations.TimoCloudMessageAPIBasicImplemen
 import cloud.timo.TimoCloud.api.implementations.TimoCloudUniversalAPIBasicImplementation;
 import cloud.timo.TimoCloud.api.messages.objects.AddressedPluginMessage;
 import cloud.timo.TimoCloud.api.utils.EventUtil;
+import cloud.timo.TimoCloud.bukkit.TimoCloudBukkit;
 import cloud.timo.TimoCloud.cord.TimoCloudCord;
 import cloud.timo.TimoCloud.cord.api.TimoCloudUniversalAPICordImplementation;
 import cloud.timo.TimoCloud.lib.messages.Message;
@@ -47,6 +48,10 @@ public class CordStringHandler extends BasicStringHandler {
                 ((TimoCloudMessageAPIBasicImplementation) TimoCloudAPI.getMessageAPI()).onMessage(addressedPluginMessage);
                 break;
             }
+            case "SHUTDOWN":
+            	TimoCloudCord.getInstance().info("Shutting down!");
+            	System.exit(0);
+            	break;
             default:
                 TimoCloudCord.getInstance().severe("Could not categorize json message: " + originalMessage);
         }

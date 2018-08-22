@@ -106,12 +106,14 @@ public class TimoCloudBukkit extends JavaPlugin {
     }
 
     public void onSocketDisconnect(boolean connectionFailed) {
-        info("Disconnected from TimoCloudCore. Stopping server.");
-        if (connectionFailed) {
-            System.exit(0);
-        } else {
-            stop();
-        }
+        info("Disconnected from TimoCloudCore. Trying to reconnect!");
+        try {
+			Thread.sleep(250L);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        connectToCore();
     }
 
     public void onHandshakeSuccess() {
@@ -119,7 +121,7 @@ public class TimoCloudBukkit extends JavaPlugin {
         doEverySecond();
     }
 
-    private void stop() {
+    public void stop() {
         Bukkit.getScheduler().runTask(this, () -> {
             Bukkit.shutdown();
             System.exit(0);

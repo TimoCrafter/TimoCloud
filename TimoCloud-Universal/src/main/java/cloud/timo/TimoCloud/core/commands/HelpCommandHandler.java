@@ -22,6 +22,7 @@ public class HelpCommandHandler implements CommandHandler {
         sender.sendMessage("  &6baseinfo &7<&2baseName&7> - displays base info");
         sender.sendMessage("  &6listbases &7- &7lists all bases");
         sender.sendMessage("  &6sendcommand &7<&2groupName&7 | &2serverName&7 | &2proxyName&7> <&2command&7> - &7sends the given command to all server of a given group or the given server");
+        sender.sendMessage("  &6stop &7- &7Stops the entire Cloud System");
     }
 
 }

@@ -95,7 +95,8 @@ public class Server implements Instance, Communicatable {
 
     @Override
     public void stop() {
-        if (getChannel() != null) getChannel().close();
+        sendMessage(Message.create().setType("SHUTDOWN").set("name", getName()));
+    	if (getChannel() != null) getChannel().close();
         unregister();
     }
 

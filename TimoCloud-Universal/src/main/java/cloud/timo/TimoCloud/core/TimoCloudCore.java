@@ -160,8 +160,9 @@ public class TimoCloudCore implements TimoCloudModule {
                 node("listgroups"),
                 node("baseinfo", new Completers.TreeCompleter.Node(new BaseNameCompleter(), Collections.emptyList())),
                 node("listbases"),
-                node("sendcommand", new Completers.TreeCompleter.Node(new AggregateCompleter(new ServerGroupNameCompleter(), new ProxyGroupNameCompleter(), new ServerNameCompleter(), new ProxyNameCompleter()), Collections.emptyList()))
-                );
+                node("sendcommand", new Completers.TreeCompleter.Node(new AggregateCompleter(new ServerGroupNameCompleter(), new ProxyGroupNameCompleter(), new ServerNameCompleter(), new ProxyNameCompleter()), Collections.emptyList())),
+                node("stop")
+        		);
         Parser parser = new DefaultParser();
         String prompt = "> ";
         String rightPrompt = null;

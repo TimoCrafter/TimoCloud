@@ -7,6 +7,7 @@ import cloud.timo.TimoCloud.api.implementations.TimoCloudMessageAPIBasicImplemen
 import cloud.timo.TimoCloud.api.implementations.TimoCloudUniversalAPIBasicImplementation;
 import cloud.timo.TimoCloud.api.messages.objects.AddressedPluginMessage;
 import cloud.timo.TimoCloud.api.utils.EventUtil;
+import cloud.timo.TimoCloud.bukkit.TimoCloudBukkit;
 import cloud.timo.TimoCloud.bungeecord.TimoCloudBungee;
 import cloud.timo.TimoCloud.bungeecord.api.TimoCloudUniversalAPIBungeeImplementation;
 import cloud.timo.TimoCloud.lib.messages.Message;
@@ -73,6 +74,12 @@ public class BungeeStringHandler extends BasicStringHandler {
                 ((TimoCloudMessageAPIBasicImplementation) TimoCloudAPI.getMessageAPI()).onMessage(addressedPluginMessage);
                 break;
             }
+            case "SHUTDOWN":
+            	if(TimoCloudBungee.getInstance().getProxyName().equalsIgnoreCase((String) message.get("name"))) {
+            		TimoCloudBungee.getInstance().info("Shutting down!");
+            		System.exit(0);
+            	}
+            	break;
             default:
                 TimoCloudBungee.getInstance().severe("Could not categorize json message: " + message);
         }

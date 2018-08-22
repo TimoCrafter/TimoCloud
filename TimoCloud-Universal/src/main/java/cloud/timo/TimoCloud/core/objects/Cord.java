@@ -103,4 +103,8 @@ public class Cord implements Communicatable {
     public CordObject toCordObject() {
         return new CordObjectCoreImplementation(getName(), getSocketAddress(), isConnected());
     }
+    
+    public void stop() {
+    	sendMessage(Message.create().setType("SHUTDOWN"));
+    }
 }

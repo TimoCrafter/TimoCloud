@@ -91,6 +91,11 @@ public class BaseStringHandler extends BasicStringHandler {
                     TimoCloudBase.getInstance().severe("Error while unpacking transferred files: ");
                     TimoCloudBase.getInstance().severe(e);
                 }
+                break;
+            case "SHUTDOWN":
+            	TimoCloudBase.getInstance().info("Shutting down Base!");
+            	System.exit(0);
+            	break;
             default:
                 TimoCloudBase.getInstance().severe("Could not categorize json message: " + originalMessage);
         }

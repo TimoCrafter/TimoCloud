@@ -52,6 +52,12 @@ public class BukkitStringHandler extends BasicStringHandler {
                 ((TimoCloudMessageAPIBasicImplementation) TimoCloudAPI.getMessageAPI()).onMessage(addressedPluginMessage);
                 break;
             }
+            case "SHUTDOWN":
+            	if(TimoCloudBukkit.getInstance().getServerName().equalsIgnoreCase((String) message.get("name"))) {
+            		TimoCloudBukkit.getInstance().info("Shutting down!");
+            		TimoCloudBukkit.getInstance().stop();
+            	}
+            	break;
             default:
                 TimoCloudBukkit.getInstance().severe("Error: Could not categorize json message: " + message);
         }
