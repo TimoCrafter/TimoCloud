@@ -1,14 +1,27 @@
 package cloud.timo.TimoCloud.core.managers;
 
-import cloud.timo.TimoCloud.api.core.commands.CommandHandler;
-import cloud.timo.TimoCloud.api.core.commands.CommandSender;
-import cloud.timo.TimoCloud.core.TimoCloudCore;
-import cloud.timo.TimoCloud.core.commands.*;
-import cloud.timo.TimoCloud.lib.utils.ChatColorUtil;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import cloud.timo.TimoCloud.api.core.commands.CommandHandler;
+import cloud.timo.TimoCloud.api.core.commands.CommandSender;
+import cloud.timo.TimoCloud.core.TimoCloudCore;
+import cloud.timo.TimoCloud.core.commands.BaseInfoCommandHandler;
+import cloud.timo.TimoCloud.core.commands.CreateGroupCommandHandler;
+import cloud.timo.TimoCloud.core.commands.DebugCommandHandler;
+import cloud.timo.TimoCloud.core.commands.DeleteGroupCommand;
+import cloud.timo.TimoCloud.core.commands.EditGroupCommandHandler;
+import cloud.timo.TimoCloud.core.commands.GroupInfoCommandHandler;
+import cloud.timo.TimoCloud.core.commands.HelpCommandHandler;
+import cloud.timo.TimoCloud.core.commands.ListBasesCommand;
+import cloud.timo.TimoCloud.core.commands.ListGroupsCommandHandler;
+import cloud.timo.TimoCloud.core.commands.ReloadCommandHandler;
+import cloud.timo.TimoCloud.core.commands.RestartCommandHandler;
+import cloud.timo.TimoCloud.core.commands.SendCommandCommandHandler;
+import cloud.timo.TimoCloud.core.commands.StopCommandHandler;
+import cloud.timo.TimoCloud.core.commands.VersionCommandHandler;
+import cloud.timo.TimoCloud.lib.utils.ChatColorUtil;
 
 public class CommandManager {
 

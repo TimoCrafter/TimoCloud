@@ -1,5 +1,7 @@
 package cloud.timo.TimoCloud.cord.sockets;
 
+import java.util.Map;
+
 import cloud.timo.TimoCloud.api.TimoCloudAPI;
 import cloud.timo.TimoCloud.api.events.EventType;
 import cloud.timo.TimoCloud.api.implementations.EventManager;
@@ -7,7 +9,6 @@ import cloud.timo.TimoCloud.api.implementations.TimoCloudMessageAPIBasicImplemen
 import cloud.timo.TimoCloud.api.implementations.TimoCloudUniversalAPIBasicImplementation;
 import cloud.timo.TimoCloud.api.messages.objects.AddressedPluginMessage;
 import cloud.timo.TimoCloud.api.utils.EventUtil;
-import cloud.timo.TimoCloud.bukkit.TimoCloudBukkit;
 import cloud.timo.TimoCloud.cord.TimoCloudCord;
 import cloud.timo.TimoCloud.cord.api.TimoCloudUniversalAPICordImplementation;
 import cloud.timo.TimoCloud.lib.messages.Message;
@@ -16,8 +17,6 @@ import cloud.timo.TimoCloud.lib.utils.EnumUtil;
 import cloud.timo.TimoCloud.lib.utils.PluginMessageSerializer;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
-
-import java.util.Map;
 
 @ChannelHandler.Sharable
 public class CordStringHandler extends BasicStringHandler {

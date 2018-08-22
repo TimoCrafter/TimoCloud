@@ -1,5 +1,8 @@
 package cloud.timo.TimoCloud.bungeecord.sockets;
 
+import java.net.InetSocketAddress;
+import java.util.Map;
+
 import cloud.timo.TimoCloud.api.TimoCloudAPI;
 import cloud.timo.TimoCloud.api.events.EventType;
 import cloud.timo.TimoCloud.api.implementations.EventManager;
@@ -7,7 +10,6 @@ import cloud.timo.TimoCloud.api.implementations.TimoCloudMessageAPIBasicImplemen
 import cloud.timo.TimoCloud.api.implementations.TimoCloudUniversalAPIBasicImplementation;
 import cloud.timo.TimoCloud.api.messages.objects.AddressedPluginMessage;
 import cloud.timo.TimoCloud.api.utils.EventUtil;
-import cloud.timo.TimoCloud.bukkit.TimoCloudBukkit;
 import cloud.timo.TimoCloud.bungeecord.TimoCloudBungee;
 import cloud.timo.TimoCloud.bungeecord.api.TimoCloudUniversalAPIBungeeImplementation;
 import cloud.timo.TimoCloud.lib.messages.Message;
@@ -16,9 +18,6 @@ import cloud.timo.TimoCloud.lib.utils.EnumUtil;
 import cloud.timo.TimoCloud.lib.utils.PluginMessageSerializer;
 import cloud.timo.TimoCloud.lib.utils.network.InetAddressUtil;
 import io.netty.channel.Channel;
-
-import java.net.InetSocketAddress;
-import java.util.Map;
 
 public class BungeeStringHandler extends BasicStringHandler {
 
@@ -77,6 +76,7 @@ public class BungeeStringHandler extends BasicStringHandler {
             case "SHUTDOWN":
             	if(TimoCloudBungee.getInstance().getProxyName().equalsIgnoreCase((String) message.get("name"))) {
             		TimoCloudBungee.getInstance().info("Shutting down!");
+            		TimoCloudBungee.getInstance().stop();
             		System.exit(0);
             	}
             	break;

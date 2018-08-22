@@ -1,22 +1,5 @@
 package cloud.timo.TimoCloud.cord;
 
-import cloud.timo.TimoCloud.api.implementations.EventManager;
-import cloud.timo.TimoCloud.api.utils.APIInstanceUtil;
-import cloud.timo.TimoCloud.cord.api.TimoCloudInternalMessageAPICordImplementation;
-import cloud.timo.TimoCloud.cord.api.TimoCloudMessageAPICordImplementation;
-import cloud.timo.TimoCloud.cord.api.TimoCloudUniversalAPICordImplementation;
-import cloud.timo.TimoCloud.cord.managers.CordFileManager;
-import cloud.timo.TimoCloud.cord.managers.ProxyManager;
-import cloud.timo.TimoCloud.cord.sockets.*;
-import cloud.timo.TimoCloud.lib.logging.LoggingOutputStream;
-import cloud.timo.TimoCloud.lib.messages.Message;
-import cloud.timo.TimoCloud.lib.modules.ModuleType;
-import cloud.timo.TimoCloud.lib.modules.TimoCloudModule;
-import cloud.timo.TimoCloud.lib.utils.options.OptionSet;
-import io.netty.channel.Channel;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
-
 import java.io.File;
 import java.io.PrintStream;
 import java.net.ServerSocket;
@@ -25,6 +8,28 @@ import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import cloud.timo.TimoCloud.api.implementations.EventManager;
+import cloud.timo.TimoCloud.api.utils.APIInstanceUtil;
+import cloud.timo.TimoCloud.cord.api.TimoCloudInternalMessageAPICordImplementation;
+import cloud.timo.TimoCloud.cord.api.TimoCloudMessageAPICordImplementation;
+import cloud.timo.TimoCloud.cord.api.TimoCloudUniversalAPICordImplementation;
+import cloud.timo.TimoCloud.cord.managers.CordFileManager;
+import cloud.timo.TimoCloud.cord.managers.ProxyManager;
+import cloud.timo.TimoCloud.cord.sockets.CordSocketClient;
+import cloud.timo.TimoCloud.cord.sockets.CordSocketClientHandler;
+import cloud.timo.TimoCloud.cord.sockets.CordSocketMessageManager;
+import cloud.timo.TimoCloud.cord.sockets.CordSocketServer;
+import cloud.timo.TimoCloud.cord.sockets.CordStringHandler;
+import cloud.timo.TimoCloud.cord.sockets.MinecraftDecoder;
+import cloud.timo.TimoCloud.lib.logging.LoggingOutputStream;
+import cloud.timo.TimoCloud.lib.messages.Message;
+import cloud.timo.TimoCloud.lib.modules.ModuleType;
+import cloud.timo.TimoCloud.lib.modules.TimoCloudModule;
+import cloud.timo.TimoCloud.lib.utils.options.OptionSet;
+import io.netty.channel.Channel;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.nio.NioEventLoopGroup;
 
 public class TimoCloudCord implements TimoCloudModule {
 

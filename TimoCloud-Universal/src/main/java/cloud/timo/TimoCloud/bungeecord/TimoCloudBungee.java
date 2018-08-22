@@ -1,5 +1,10 @@
 package cloud.timo.TimoCloud.bungeecord;
 
+import java.io.PrintStream;
+import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import cloud.timo.TimoCloud.api.TimoCloudAPI;
 import cloud.timo.TimoCloud.api.implementations.EventManager;
 import cloud.timo.TimoCloud.api.implementations.TimoCloudUniversalAPIBasicImplementation;
@@ -12,7 +17,11 @@ import cloud.timo.TimoCloud.bungeecord.commands.FindCommand;
 import cloud.timo.TimoCloud.bungeecord.commands.GlistCommand;
 import cloud.timo.TimoCloud.bungeecord.commands.LobbyCommand;
 import cloud.timo.TimoCloud.bungeecord.commands.TimoCloudCommand;
-import cloud.timo.TimoCloud.bungeecord.listeners.*;
+import cloud.timo.TimoCloud.bungeecord.listeners.EventMonitor;
+import cloud.timo.TimoCloud.bungeecord.listeners.IpInjector;
+import cloud.timo.TimoCloud.bungeecord.listeners.LobbyJoin;
+import cloud.timo.TimoCloud.bungeecord.listeners.ProxyPing;
+import cloud.timo.TimoCloud.bungeecord.listeners.ServerKick;
 import cloud.timo.TimoCloud.bungeecord.managers.BungeeEventManager;
 import cloud.timo.TimoCloud.bungeecord.managers.BungeeFileManager;
 import cloud.timo.TimoCloud.bungeecord.managers.IpManager;
@@ -25,11 +34,6 @@ import cloud.timo.TimoCloud.lib.logging.LoggingOutputStream;
 import cloud.timo.TimoCloud.lib.messages.Message;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Plugin;
-
-import java.io.PrintStream;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class TimoCloudBungee extends Plugin {
 
@@ -164,7 +168,7 @@ public class TimoCloudBungee extends Plugin {
 		everySecond();
 	}
 
-	private void stop() {
+	public void stop() {
 		getProxy().stop();
 	}
 
