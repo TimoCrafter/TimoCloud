@@ -1,6 +1,8 @@
 package cloud.timo.TimoCloud.bungeecord.listeners;
 
 import cloud.timo.TimoCloud.bungeecord.TimoCloudBungee;
+import cloud.timo.TimoCloud.bungeecord.objects.LobbyChooseStrategy;
+import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PostLoginEvent;
@@ -26,7 +28,7 @@ public class LobbyJoin implements Listener {
 
     @EventHandler
     public void onPlayerConnect(PostLoginEvent event) {
-        if (! TimoCloudBungee.getInstance().getFileManager().getConfig().getBoolean("useFallback")) {
+        if (!TimoCloudBungee.getInstance().getFileManager().getConfig().getBoolean("useFallback")) {
             return;
         }
         pending.add(event.getPlayer().getUniqueId());
@@ -34,16 +36,19 @@ public class LobbyJoin implements Listener {
 
     @EventHandler
     public void onServerConnect(ServerConnectEvent event) {
-        if (! isPending(event.getPlayer().getUniqueId())) {
-            return;
-        }
+        if (!isPending(event.getPlayer().getUniqueId())) return;
+
         ProxiedPlayer player = event.getPlayer();
-        ServerInfo info = TimoCloudBungee.getInstance().getLobbyManager().getFreeLobby(player.getUniqueId());
-        if (info == null) {
-            TimoCloudBungee.getInstance().severe("No lobby server found.");
-            return;
+
+        if (TimoCloudBungee.getInstance().getLobbyManager().getLobbyChooseStrategy() != LobbyChooseStrategy.NONE) {
+            ServerInfo info = TimoCloudBungee.getInstance().getLobbyManager().getFreeLobby(player.getUniqueId());
+            if (info == null) {
+                TimoCloudBungee.getInstance().severe("No lobby server found.");
+                return;
+            }
+            event.setTarget(info);
         }
-        event.setTarget(info);
+
         pending.remove(player.getUniqueId());
     }
 
@@ -52,4 +57,5 @@ public class LobbyJoin implements Listener {
         event.setCancelled(true);
         event.setCancelServer(TimoCloudBungee.getInstance().getLobbyManager().getFreeLobby(event.getPlayer().getUniqueId()));
     }
+
 }

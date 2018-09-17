@@ -2,7 +2,7 @@ prefix: '&6[&bTimo&fCloud&6]'
 fallbackGroup: 'Lobby'
 useFallback: true
 emergencyFallback: 'Economy'
-LobbyChooseStrategy: "RANDOM"
+LobbyChooseStrategy: "NONE"
 lobbyCommands:
 - lobby
 - hub

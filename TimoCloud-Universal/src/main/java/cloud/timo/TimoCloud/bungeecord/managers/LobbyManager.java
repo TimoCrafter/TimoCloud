@@ -9,6 +9,7 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
+import javax.print.attribute.SetOfIntegerSyntax;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class LobbyManager {
     private List<String> getVisitedLobbies(UUID uuid) {
         lobbyHistory.putIfAbsent(uuid, new ArrayList<>());
         lastUpdate.putIfAbsent(uuid, 0L);
-        if (new Date().getTime()-lastUpdate.get(uuid) >= INVALIDATE_CACHE_TIME) {
+        if (new Date().getTime() - lastUpdate.get(uuid) >= INVALIDATE_CACHE_TIME) {
             lobbyHistory.put(uuid, new ArrayList<>());
         }
         lastUpdate.put(uuid, new Date().getTime());
@@ -39,7 +40,7 @@ public class LobbyManager {
         lobbyHistory.get(uuid).add(server);
     }
 
-    private LobbyChooseStrategy getLobbyChooseStrategy() {
+    public LobbyChooseStrategy getLobbyChooseStrategy() {
         return LobbyChooseStrategy.valueOf(TimoCloudBungee.getInstance().getFileManager().getConfig().getString("LobbyChooseStrategy"));
     }
 
@@ -49,6 +50,7 @@ public class LobbyManager {
             TimoCloudBungee.getInstance().severe("Error while searching lobby: Could not find specified fallbackGroup '" + TimoCloudBungee.getInstance().getFileManager().getConfig().getString("fallbackGroup") + "'");
             return null;
         }
+
         String notThisName = notThis == null ? "" : notThis.getName();
         List<ServerObject> servers = group.getServers().stream()
                 .filter(server -> !server.getName().equals(notThisName))
@@ -60,7 +62,7 @@ public class LobbyManager {
         List<String> history = getVisitedLobbies(uuid);
 
         for (ServerObject server : servers) {
-            if (history.contains(server.getName()) && ! removeServers.contains(server)) removeServers.add(server);
+            if (history.contains(server.getName()) && !removeServers.contains(server)) removeServers.add(server);
         }
         servers.removeAll(removeServers);
         if (servers.size() == 0) {
@@ -74,7 +76,7 @@ public class LobbyManager {
                 target = servers.get(new Random().nextInt(servers.size()));
                 break;
             case FILL:
-                for (int i = servers.size()-1; i>= 0; i--) {
+                for (int i = servers.size() - 1; i >= 0; i--) {
                     ServerObject server = servers.get(i);
                     if (server.getOnlinePlayerCount() < server.getMaxPlayerCount()) {
                         target = server;
