@@ -9,7 +9,6 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
-import javax.print.attribute.SetOfIntegerSyntax;
 import java.util.*;
 import java.util.stream.Collectors;
 
