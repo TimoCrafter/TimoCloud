@@ -515,7 +515,7 @@ public class CoreInstanceManager {
             int stopAmount = -amount;
             for (int i = 0; i < stopAmount; i++) {
                 for (Server server : group.getServers()) {
-                    if (server.getOnlinePlayerCount() == 0 && !isStateActive(server.getState(), server.getGroup())) {
+                    if (server.getOnlinePlayerCount() == 0 && isStateActive(server.getState(), server.getGroup())) {
                         TimoCloudCore.getInstance().info("Stopping server " + server.getName() + " because no players are online and it is no longer needed.");
                         server.stop();
                         break;
@@ -627,7 +627,7 @@ public class CoreInstanceManager {
     private int serversNeeded(ServerGroup group) {
         int running = (int) group.getServers().stream().filter((server) -> isStateActive(server.getState(), group) || server.isStarting()).count();
         int needed = group.getOnlineAmount() - running;
-        return group.getMaxAmount() > 0 ? Math.min(needed, group.getMaxAmount()) : needed;
+        return group.getMaxAmount() > 0 ? Math.min(needed, group.getMaxAmount() - group.getServers().size()) : needed;
     }
 
     /**
