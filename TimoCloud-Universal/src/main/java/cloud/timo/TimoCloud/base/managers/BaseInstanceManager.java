@@ -192,21 +192,13 @@ public class BaseInstanceManager {
                 if (mapDirectory.exists()) copyDirectory(mapDirectory, temporaryDirectory);
             }
 
-            /*
             File spigotJar = new File(temporaryDirectory, "spigot.jar");
-<<<<<<< HEAD
-            if (!spigotJar.exists()) {
-                TimoCloudBase.getInstance().severe("Could not start server " + server.getName() + " because spigot.jar does not exist. Please make sure a the file " + spigotJar.getAbsolutePath() + " exists (case sensitive!). If not, DON'T create it there, but in the Core template!");
-                throw new ServerStartException("spigot.jar does not exist");
-            }*/
-=======
             if (! spigotJar.exists()) {
                 TimoCloudBase.getInstance().severe("Could not start server " + server.getName() + " because spigot.jar does not exist. " + (
                         server.isStatic() ? "Please make sure the file " + spigotJar.getAbsolutePath() + " exists (case sensitive!)."
                                 : "Please make sure to have a file called 'spigot.jar' in your template."));
                 throw new ProxyStartException("spigot.jar does not exist");
             }
->>>>>>> adeeb1394c91ec35769adc4d97ca41e100f87c26
 
             File plugins = new File(temporaryDirectory, "/plugins/");
             plugins.mkdirs();
@@ -230,7 +222,8 @@ public class BaseInstanceManager {
             File serverProperties = new File(temporaryDirectory, "server.properties");
             setProperty(serverProperties, "online-mode", "false");
             setProperty(serverProperties, "server-name", server.getName());
-            setProperty(serverProperties, "allow-nether", "false");
+            if (!server.getName().contains("SURVIVAL")) setProperty(serverProperties, "allow-nether", "false");
+            setProperty(serverProperties, "view-distance", "8");
             setProperty(serverProperties, "announce-player-achievements", "false");
 
             double millisNow = System.currentTimeMillis();
