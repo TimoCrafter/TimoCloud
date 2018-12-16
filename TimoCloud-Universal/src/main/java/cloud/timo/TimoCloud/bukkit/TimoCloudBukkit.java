@@ -144,7 +144,7 @@ public class TimoCloudBukkit extends JavaPlugin {
         APIInstanceUtil.setMessageInstance(new TimoCloudMessageAPIBukkitImplementation());
     }
 
-    //The method checks if a server is running on 1.13 or above.
+    //Check if running on version 1.13 or above by accessing a material only available since 1.13
     public boolean isVersion1_13OrAbove() {
         try {
             //1.13 Item
