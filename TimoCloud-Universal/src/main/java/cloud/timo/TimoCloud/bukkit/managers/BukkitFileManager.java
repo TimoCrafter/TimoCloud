@@ -117,11 +117,11 @@ public class BukkitFileManager {
         signTemplates.addDefault("NoFreeServerFound.layouts.Default.lines.4", "&2▲▲▲;&2▶▲▲;&2▶▶▲;&2▶▶▶;&2▲▶▶;&2▲▲▶;&2▲▲▲;&2▲▲◀;&2▲◀◀;&2◀◀◀;&2◀◀▲;&2◀▲▲");
         signTemplates.addDefault("NoFreeServerFound.layouts.Default.updateSpeed", 5L);
 
-        if(TimoCloudBukkit.getInstance().isVersion("1.13")){
-            signTemplates.addDefault("Default.layouts.STARTING.signBlockMaterial", "BLUE_CONCRETE");
-            signTemplates.addDefault("Default.layouts.ONLINE.signBlockMaterial", "BLUE_CONCRETE");
-            signTemplates.addDefault("NoFreeServerFound.layouts.Default.signBlockMaterial", "BLUE_CONCRETE");
-        } else if(!TimoCloudBukkit.getInstance().isVersion("1.13")){
+        if( TimoCloudBukkit.getInstance().isVersion1_13OrAbove()){
+            signTemplates.addDefault("Default.layouts.STARTING.signBlockMaterial", "GRAY_CONCRETE");
+            signTemplates.addDefault("Default.layouts.ONLINE.signBlockMaterial", "GREEN_CONCRETE");
+            signTemplates.addDefault("NoFreeServerFound.layouts.Default.signBlockMaterial", "RED_CONCRETE");
+        } else {
             signTemplates.addDefault("Default.layouts.STARTING.signBlockMaterial", "STAINED_CLAY");
             signTemplates.addDefault("Default.layouts.STARTING.signBlockData", 4);
             signTemplates.addDefault("Default.layouts.ONLINE.signBlockMaterial", "STAINED_CLAY");

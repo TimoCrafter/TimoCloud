@@ -24,6 +24,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,6 +32,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.PrintStream;
 import java.net.InetAddress;
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -76,11 +78,12 @@ public class TimoCloudBukkit extends JavaPlugin {
                     Thread.sleep(50); // Wait until we get the API data
                 } catch (Exception e) {}
             }
-            info("&ahas been enabled!");
+            info("&aTimoCloudBukkit has been enabled!");
         } catch (Exception e) {
             severe("Error while enabling TimoCloudBukkit: ");
             TimoCloudBukkit.getInstance().severe(e);
         }
+        System.out.println(isVersion1_13OrAbove());
     }
 
     @Override
@@ -142,9 +145,13 @@ public class TimoCloudBukkit extends JavaPlugin {
         APIInstanceUtil.setMessageInstance(new TimoCloudMessageAPIBukkitImplementation());
     }
 
-    public boolean isVersion(String s){
-        String version = Bukkit.getBukkitVersion();
-        return version.contains(s);
+    public boolean isVersion1_13OrAbove(){
+        try{
+            Material material = Material.ACACIA_BOAT;
+        }catch (NoSuchFieldError e){
+            return false;
+        }
+        return true;
     }
 
     private void registerCommands() {
