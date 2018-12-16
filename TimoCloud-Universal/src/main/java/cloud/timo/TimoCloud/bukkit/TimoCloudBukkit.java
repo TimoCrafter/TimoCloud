@@ -83,7 +83,6 @@ public class TimoCloudBukkit extends JavaPlugin {
             severe("Error while enabling TimoCloudBukkit: ");
             TimoCloudBukkit.getInstance().severe(e);
         }
-        System.out.println(isVersion1_13OrAbove());
     }
 
     @Override
@@ -145,10 +144,12 @@ public class TimoCloudBukkit extends JavaPlugin {
         APIInstanceUtil.setMessageInstance(new TimoCloudMessageAPIBukkitImplementation());
     }
 
-    public boolean isVersion1_13OrAbove(){
-        try{
+    //The method checks if a server is running on 1.13 or above.
+    public boolean isVersion1_13OrAbove() {
+        try {
+            //1.13 Item
             Material material = Material.ACACIA_BOAT;
-        }catch (NoSuchFieldError e){
+        } catch (NoSuchFieldError e) {
             return false;
         }
         return true;
