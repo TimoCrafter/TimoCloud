@@ -8,10 +8,11 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.event.ProxyPingEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
+import net.md_5.bungee.event.EventPriority;
 
 public class ProxyPing implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onProxyPingEvent(ProxyPingEvent event) {
         ProxyObject proxyObject = TimoCloudAPI.getBungeeAPI().getThisProxy();
 

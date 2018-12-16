@@ -142,6 +142,11 @@ public class TimoCloudBukkit extends JavaPlugin {
         APIInstanceUtil.setMessageInstance(new TimoCloudMessageAPIBukkitImplementation());
     }
 
+    public boolean isVersion(String s){
+        String version = Bukkit.getBukkitVersion();
+        return version.contains(s);
+    }
+
     private void registerCommands() {
         getCommand("signs").setExecutor(new SignsCommand());
         final TimoCloudBukkitCommand timoCloudBukkitCommand = new TimoCloudBukkitCommand();
