@@ -117,7 +117,7 @@ public class BukkitFileManager {
         signTemplates.addDefault("NoFreeServerFound.layouts.Default.lines.4", "&2▲▲▲;&2▶▲▲;&2▶▶▲;&2▶▶▶;&2▲▶▶;&2▲▲▶;&2▲▲▲;&2▲▲◀;&2▲◀◀;&2◀◀◀;&2◀◀▲;&2◀▲▲");
         signTemplates.addDefault("NoFreeServerFound.layouts.Default.updateSpeed", 5L);
 
-        if (TimoCloudBukkit.getInstance().isVersion1_13OrAbove()) {
+        if (TimoCloudBukkit.getInstance().isVersion113OrAbove()) {
             signTemplates.addDefault("Default.layouts.STARTING.signBlockMaterial", "GRAY_CONCRETE");
             signTemplates.addDefault("Default.layouts.ONLINE.signBlockMaterial", "GREEN_CONCRETE");
             signTemplates.addDefault("NoFreeServerFound.layouts.Default.signBlockMaterial", "RED_CONCRETE");

@@ -18,10 +18,10 @@ public class PlayerInteract implements Listener {
         if (! event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) return;
         Block block = event.getClickedBlock();
 
-        if (TimoCloudBukkit.getInstance().isVersion1_13OrAbove()){
+        if (TimoCloudBukkit.getInstance().isVersion113OrAbove()){
             if (! Arrays.asList(Material.WALL_SIGN, Material.LEGACY_SIGN_POST).contains(block.getType())) return;
             TimoCloudBukkit.getInstance().getSignManager().onSignClick(event.getPlayer(), block.getLocation());
-        } else if (!TimoCloudBukkit.getInstance().isVersion1_13OrAbove()){
+        } else if (!TimoCloudBukkit.getInstance().isVersion113OrAbove()){
             if (! Arrays.asList(Material.WALL_SIGN, Material.valueOf("SIGN_POST")).contains(block.getType())) return;
             TimoCloudBukkit.getInstance().getSignManager().onSignClick(event.getPlayer(), block.getLocation());
         }
