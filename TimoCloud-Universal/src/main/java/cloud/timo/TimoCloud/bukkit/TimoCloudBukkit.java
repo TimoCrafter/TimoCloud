@@ -32,7 +32,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.PrintStream;
 import java.net.InetAddress;
-import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -145,7 +144,7 @@ public class TimoCloudBukkit extends JavaPlugin {
     }
 
     //Check if running on version 1.13 or above by accessing a material only available since 1.13
-    public boolean isVersion1_13OrAbove() {
+    public boolean isVersion113OrAbove() {
         try {
             //1.13 Item
             Material material = Material.DEAD_FIRE_CORAL_BLOCK;
