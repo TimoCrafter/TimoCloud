@@ -148,7 +148,7 @@ public class TimoCloudBukkit extends JavaPlugin {
     public boolean isVersion1_13OrAbove() {
         try {
             //1.13 Item
-            Material material = Material.ACACIA_BOAT;
+            Material material = Material.DEAD_FIRE_CORAL_BLOCK;
         } catch (NoSuchFieldError e) {
             return false;
         }
