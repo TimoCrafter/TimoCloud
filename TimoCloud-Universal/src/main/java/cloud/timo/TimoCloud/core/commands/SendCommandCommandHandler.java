@@ -21,8 +21,8 @@ public class SendCommandCommandHandler  extends CommandFormatUtil implements Com
         ServerGroup serverGroup = TimoCloudCore.getInstance().getInstanceManager().getServerGroupByName(target);
         ProxyGroup proxyGroup = TimoCloudCore.getInstance().getInstanceManager().getProxyGroupByName(target);
 
-        Server server = TimoCloudCore.getInstance().getInstanceManager().getServerById(target);
-        Proxy proxy = TimoCloudCore.getInstance().getInstanceManager().getProxyById(target);
+        Server server = TimoCloudCore.getInstance().getInstanceManager().getServerByName(target);
+        Proxy proxy = TimoCloudCore.getInstance().getInstanceManager().getProxyByName(target);
 
         if (serverGroup == null && proxyGroup == null && server == null && proxy == null) {
             sender.sendError("Could not find any group, server or proxy with the name '" + target + "'");

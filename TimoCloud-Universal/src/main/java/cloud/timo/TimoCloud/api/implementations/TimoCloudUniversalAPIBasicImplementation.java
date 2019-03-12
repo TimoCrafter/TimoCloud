@@ -146,9 +146,10 @@ public class TimoCloudUniversalAPIBasicImplementation implements TimoCloudUniver
 
     @Override
     public PlayerObject getPlayer(String name) {
+        name = name.toUpperCase();
         for (ProxyObject proxyObject : getProxyGroups().stream().map(ProxyGroupObject::getProxies).flatMap(List::stream).collect(Collectors.toList()))
             for (PlayerObject playerObject : proxyObject.getOnlinePlayers())
-                if (playerObject.getName().equals(name)) return playerObject;
+                if (playerObject.getName().toUpperCase().equals(name)) return playerObject;
         return null;
     }
 

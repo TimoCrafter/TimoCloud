@@ -380,7 +380,6 @@ public class CoreInstanceManager {
     /**
      * Searches for a server by name (case-insensitive)
      *
-     * @deprecated Use {@link CoreInstanceManager#getServerById(String)} instead
      * @param name The server's name (case-insensitive)
      * @return A server object
      */
@@ -410,7 +409,6 @@ public class CoreInstanceManager {
     /**
      * Searches for a proxy by name (case-insensitive)
      *
-     * @deprecated Use {@link CoreInstanceManager#getProxyById(String)} instead
      * @param name The proxy's name (case-insensitive)
      * @return A proxy object
      */
