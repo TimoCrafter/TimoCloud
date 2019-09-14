@@ -71,7 +71,8 @@ public class SignManager {
         FileConfiguration config = TimoCloudBukkit.getInstance().getFileManager().getSignTemplates();
         for (String template : config.getKeys(false)) {
             Map<String, SignLayout> layouts = new HashMap<>();
-            List<String> sortOutStates = config.getStringList(template + ".sortOutStates");
+            String sortOutStatesKey = template + ".sortOutStates";
+            List<String> sortOutStates = config.contains(sortOutStatesKey) ? config.getStringList(template + ".sortOutStates") : null;
             try {
                 for (String layout : config.getConfigurationSection(template + ".layouts").getKeys(false)) {
                     List<String>[] lines = Arrays.copyOf(new Object[4], 4, List[].class);
@@ -266,9 +267,11 @@ public class SignManager {
         Block attachedTo = getSignBlockAttached(signBlock);
         if (attachedTo == null) return;
         attachedTo.setType(material);
-        try {
-            Block.class.getMethod("setData", byte.class).invoke(attachedTo, (byte) signLayout.getSignBlockData());
-        } catch (Exception e) {
+        if (! TimoCloudBukkit.getInstance().isVersion113OrAbove()) {
+            try {
+                Block.class.getMethod("setData", byte.class).invoke(attachedTo, (byte) signLayout.getSignBlockData());
+            } catch (Exception e) {
+            }
         }
     }
 

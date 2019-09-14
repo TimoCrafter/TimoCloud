@@ -20,17 +20,18 @@ import cloud.timo.TimoCloud.bukkit.sockets.BukkitSocketMessageManager;
 import cloud.timo.TimoCloud.bukkit.sockets.BukkitStringHandler;
 import cloud.timo.TimoCloud.lib.logging.LoggingOutputStream;
 import cloud.timo.TimoCloud.lib.messages.Message;
+import cloud.timo.TimoCloud.lib.utils.network.InetAddressUtil;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.PrintStream;
-import java.net.InetAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -76,7 +77,7 @@ public class TimoCloudBukkit extends JavaPlugin {
                     Thread.sleep(50); // Wait until we get the API data
                 } catch (Exception e) {}
             }
-            info("&ahas been enabled!");
+            info("&aTimoCloudBukkit has been enabled!");
         } catch (Exception e) {
             severe("Error while enabling TimoCloudBukkit: ");
             TimoCloudBukkit.getInstance().severe(e);
@@ -140,6 +141,17 @@ public class TimoCloudBukkit extends JavaPlugin {
         APIInstanceUtil.setBukkitInstance(new TimoCloudBukkitAPIImplementation());
         APIInstanceUtil.setEventInstance(new EventManager());
         APIInstanceUtil.setMessageInstance(new TimoCloudMessageAPIBukkitImplementation());
+    }
+
+    //Check if running on version 1.13 or above by accessing a material only available since 1.13
+    public boolean isVersion113OrAbove() {
+        try {
+            //1.13 Item
+            Material material = Material.DEAD_FIRE_CORAL_BLOCK;
+        } catch (NoSuchFieldError e) {
+            return false;
+        }
+        return true;
     }
 
     private void registerCommands() {
@@ -221,7 +233,7 @@ public class TimoCloudBukkit extends JavaPlugin {
 
     private void sendMotds() {
         try {
-            ServerListPingEvent event = new ServerListPingEvent(InetAddress.getLocalHost(), Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+            ServerListPingEvent event = new ServerListPingEvent(InetAddressUtil.getLocalHost(), Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
             Bukkit.getPluginManager().callEvent(event);
             getSocketMessageManager().sendMessage(Message.create().setType("SET_MOTD").setData(event.getMotd()));
             getStateByEventManager().setStateByMotd(event.getMotd().trim());
@@ -234,7 +246,7 @@ public class TimoCloudBukkit extends JavaPlugin {
 
     public int getOnlinePlayersAmount() {
         try {
-            ServerListPingEvent event = new ServerListPingEvent(InetAddress.getLocalHost(), Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+            ServerListPingEvent event = new ServerListPingEvent(InetAddressUtil.getLocalHost(), Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
             Bukkit.getPluginManager().callEvent(event);
             return event.getNumPlayers();
         } catch (Exception e) {
@@ -246,7 +258,7 @@ public class TimoCloudBukkit extends JavaPlugin {
 
     public int getMaxPlayersAmount() {
         try {
-            ServerListPingEvent event = new ServerListPingEvent(InetAddress.getLocalHost(), Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+            ServerListPingEvent event = new ServerListPingEvent(InetAddressUtil.getLocalHost(), Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
             Bukkit.getPluginManager().callEvent(event);
             return event.getMaxPlayers();
         } catch (Exception e) {
