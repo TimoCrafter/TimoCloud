@@ -192,6 +192,7 @@ public class BaseInstanceManager {
                 if (mapDirectory.exists()) copyDirectory(mapDirectory, temporaryDirectory);
             }
 
+            /*
             File spigotJar = new File(temporaryDirectory, "spigot.jar");
             if (! spigotJar.exists()) {
                 TimoCloudBase.getInstance().severe("Could not start server " + server.getName() + " because spigot.jar does not exist. " + (
@@ -199,6 +200,7 @@ public class BaseInstanceManager {
                                 : "Please make sure to have a file called 'spigot.jar' in your template."));
                 throw new ProxyStartException("spigot.jar does not exist");
             }
+            */
 
             File plugins = new File(temporaryDirectory, "/plugins/");
             plugins.mkdirs();
@@ -221,7 +223,7 @@ public class BaseInstanceManager {
 
             File serverProperties = new File(temporaryDirectory, "server.properties");
             setProperty(serverProperties, "online-mode", "false");
-            setProperty(serverProperties, "server-name", server.getName());
+            setProperty(serverProperties, "server-name", server.getName().replace("$", "_"));
             if (!server.getName().contains("SURVIVAL")) setProperty(serverProperties, "allow-nether", "false");
             setProperty(serverProperties, "view-distance", "8");
             setProperty(serverProperties, "announce-player-achievements", "false");
@@ -232,7 +234,7 @@ public class BaseInstanceManager {
 
             ProcessBuilder pb = new ProcessBuilder(
                     "/bin/sh", "-c",
-                    "screen -mdS " + server.getName() +
+                    "screen -mdS " + server.getName().replace("$", "_") +
                             " java -server " +
                             " -Xmx" + server.getRam() + "M" +
                             " -Dfile.encoding=UTF8 -XX:+UseG1GC -XX:+UnlockExperimentalVMOptions -XX:+AggressiveOpts -XX:+DoEscapeAnalysis -XX:+UseCompressedOops -XX:MaxGCPauseMillis=10 -XX:GCPauseIntervalMillis=100 -XX:+UseAdaptiveSizePolicy -XX:ParallelGCThreads=2 -XX:UseSSE=3 " +
@@ -245,8 +247,13 @@ public class BaseInstanceManager {
                             " -Dtimocloud-static=" + server.isStatic() +
                             " -Dtimocloud-templatedirectory=" + templateDirectory.getAbsolutePath() +
                             " -Dtimocloud-temporarydirectory=" + temporaryDirectory.getAbsolutePath() +
-                            " -classpath \"/home/akardoo/paperclip.jar:/home/akardoo/lib/*\" com.destroystokyo.paperclip.Main -o false -h 0.0.0.0 -p " + port
+                            (server.getGroup().equals("GAME-SKYBLOCK") ? " -javaagent:/home/akardoo/slimeworldmanager-classmodifier.jar ":"") +
+                            " -classpath \"/home/akardoo/paperclip.jar:/home/akardoo/lib/*\" io.papermc.paperclip.Paperclip -o false -h 0.0.0.0 -p " + port
             ).directory(temporaryDirectory);
+            for (String c : pb.command()) {
+                TimoCloudBase.getInstance().info(c);
+            }
+            TimoCloudBase.getInstance().info("Directory: " + temporaryDirectory.getAbsolutePath());
             try {
                 Process p = pb.start();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
