@@ -40,7 +40,7 @@ public class Server implements Instance, Communicatable {
 
     public Server(String name, String id, Base base, String map, ServerGroup group) {
         this.name = name;
-        this.id = id;
+        this.id = id.replace("$", "_");
         this.group = group;
         this.base = base;
         this.address = new InetSocketAddress(base.getAddress(), 0);

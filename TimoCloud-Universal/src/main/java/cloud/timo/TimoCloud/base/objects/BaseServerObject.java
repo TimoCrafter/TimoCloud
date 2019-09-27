@@ -15,7 +15,7 @@ public class BaseServerObject {
 
     public BaseServerObject(String name, String id, int ram, boolean isStatic, String map, String group, Map<String, Object> templateHash, Map<String, Object> mapHash, Map<String, Object> globalHash) {
         this.name = name;
-        this.id = id;
+        this.id = id.replace("$", "_");
         this.group = group;
         this.ram = ram;
         this.isStatic = isStatic;

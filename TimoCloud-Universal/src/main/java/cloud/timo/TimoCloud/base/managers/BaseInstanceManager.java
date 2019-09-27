@@ -223,7 +223,7 @@ public class BaseInstanceManager {
 
             File serverProperties = new File(temporaryDirectory, "server.properties");
             setProperty(serverProperties, "online-mode", "false");
-            setProperty(serverProperties, "server-name", server.getName().replace("$", "_"));
+            setProperty(serverProperties, "server-name", server.getName());
             if (!server.getName().contains("SURVIVAL")) setProperty(serverProperties, "allow-nether", "false");
             setProperty(serverProperties, "view-distance", "8");
             setProperty(serverProperties, "announce-player-achievements", "false");
@@ -250,10 +250,6 @@ public class BaseInstanceManager {
                             (server.getGroup().equals("GAME-SKYBLOCK") ? " -javaagent:/home/akardoo/slimeworldmanager-classmodifier.jar ":"") +
                             " -classpath \"/home/akardoo/paperclip.jar:/home/akardoo/lib/*\" io.papermc.paperclip.Paperclip -o false -h 0.0.0.0 -p " + port
             ).directory(temporaryDirectory);
-            for (String c : pb.command()) {
-                TimoCloudBase.getInstance().info(c);
-            }
-            TimoCloudBase.getInstance().info("Directory: " + temporaryDirectory.getAbsolutePath());
             try {
                 Process p = pb.start();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -425,7 +421,7 @@ public class BaseInstanceManager {
     }
 
     private void blockPort(int port) {
-        recentlyUsedPorts.put(port, 60);
+        recentlyUsedPorts.put(port, 60*3);
     }
 
     private boolean portIsFree(int port) {
