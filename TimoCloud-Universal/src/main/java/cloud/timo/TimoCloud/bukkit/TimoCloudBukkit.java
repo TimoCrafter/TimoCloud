@@ -14,6 +14,7 @@ import cloud.timo.TimoCloud.bukkit.listeners.*;
 import cloud.timo.TimoCloud.bukkit.managers.BukkitFileManager;
 import cloud.timo.TimoCloud.bukkit.managers.SignManager;
 import cloud.timo.TimoCloud.bukkit.managers.StateByEventManager;
+import cloud.timo.TimoCloud.bukkit.papi.CloudPlaceholder;
 import cloud.timo.TimoCloud.bukkit.sockets.BukkitSocketClient;
 import cloud.timo.TimoCloud.bukkit.sockets.BukkitSocketClientHandler;
 import cloud.timo.TimoCloud.bukkit.sockets.BukkitSocketMessageManager;
@@ -21,8 +22,11 @@ import cloud.timo.TimoCloud.bukkit.sockets.BukkitStringHandler;
 import cloud.timo.TimoCloud.lib.logging.LoggingOutputStream;
 import cloud.timo.TimoCloud.lib.messages.Message;
 import cloud.timo.TimoCloud.lib.utils.network.InetAddressUtil;
+import com.akardoo.akarcore.AkarCore;
+import com.akardoo.akarcore.AkarCoreAPI;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import org.apache.commons.lang.RandomStringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -81,6 +85,20 @@ public class TimoCloudBukkit extends JavaPlugin {
         } catch (Exception e) {
             severe("Error while enabling TimoCloudBukkit: ");
             TimoCloudBukkit.getInstance().severe(e);
+        }
+
+        if(Bukkit.getPluginManager().getPlugin("AkarCore") != null){
+            String letter = RandomStringUtils.random(1, "ABCDEFGHIJK");
+            int ram = TimoCloudAPI.getBukkitAPI().getThisServer().getGroup().getRam();
+            String type = "mini";
+            if (ram > 4000) {
+                type = "mega";
+            }
+            int number = AkarCore.getServerAK().getGlobalNumber();
+            TimoCloudAPI.getBukkitAPI().getThisServer().setExtra(type+number+letter);
+        }
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null){
+            new CloudPlaceholder(this).register();
         }
     }
 

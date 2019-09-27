@@ -37,6 +37,10 @@
             <id>snakeyaml</id>
             <url>https://mvnrepository.com/artifact/org.yaml/snakeyaml</url>
         </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>http://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
     </repositories>
 
     <build>
@@ -113,6 +117,27 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.akardoo</groupId>
+            <artifactId>AkarCore-API</artifactId>
+            <version>0.9.18</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.akardoo</groupId>
+            <artifactId>AkarCore-Core</artifactId>
+            <version>0.9.18</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.akardoo</groupId>
+            <artifactId>AkarCore-Plugin</artifactId>
+            <version>0.9.18</version>
+            <type>jar</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-api</artifactId>
             <version>1.12-SNAPSHOT</version>
@@ -130,6 +155,12 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.13-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.10.4</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

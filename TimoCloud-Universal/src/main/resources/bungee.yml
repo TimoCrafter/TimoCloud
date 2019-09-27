@@ -2,3 +2,4 @@ name: TimoCloud
 version: ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
 author: TimoCrafter
 main: cloud.timo.TimoCloud.bungeecord.TimoCloudBungee
+depend: [AkarCore]

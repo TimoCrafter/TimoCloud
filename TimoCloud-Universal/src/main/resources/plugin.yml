@@ -3,6 +3,7 @@ version: ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVer
 author: TimoCrafter
 main: cloud.timo.TimoCloud.bukkit.TimoCloudBukkit
 api-version: 1.13
+depend: [AkarCore,PlaceholderAPI]
 softdepend: [Multiverse-Core]
 commands:
   timocloudbukkit:

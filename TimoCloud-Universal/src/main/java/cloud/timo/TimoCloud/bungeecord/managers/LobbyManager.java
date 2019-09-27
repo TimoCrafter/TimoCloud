@@ -44,12 +44,23 @@ public class LobbyManager {
     }
 
     public ServerInfo searchFreeLobby(UUID uuid, ServerInfo notThis) {
-        ServerGroupObject group = TimoCloudAPI.getUniversalAPI().getServerGroup(TimoCloudBungee.getInstance().getFileManager().getConfig().getString("fallbackGroup"));
+        String notThisName = notThis == null ? "" : notThis.getName();
+        String lobbyBack = TimoCloudBungee.getInstance().getFileManager().getConfig().getString("fallbackGroup");
+        if (notThisName.startsWith("GAME-")) {
+            if (notThisName.startsWith("GAME-SKYBLOCK")) {
+                lobbyBack = "LOBBY-SKYBLOCK";
+            } else {
+                String type = notThisName.split("-")[1];
+                lobbyBack = "LOBBY-"+ type;
+            }
+        }
+
+        ServerGroupObject group = TimoCloudAPI.getUniversalAPI().getServerGroup(lobbyBack);
         if (group == null) {
-            TimoCloudBungee.getInstance().severe("Error while searching lobby: Could not find specified fallbackGroup '" + TimoCloudBungee.getInstance().getFileManager().getConfig().getString("fallbackGroup") + "'");
+            TimoCloudBungee.getInstance().severe("Error while searching lobby: Could not find specified fallbackGroup '" + lobbyBack + "'");
             return null;
         }
-        String notThisName = notThis == null ? "" : notThis.getName();
+
         List<ServerObject> servers = group.getServers().stream()
                 .filter(server -> !server.getName().equals(notThisName))
                 .filter(server -> server.getOnlinePlayerCount() < server.getMaxPlayerCount())
