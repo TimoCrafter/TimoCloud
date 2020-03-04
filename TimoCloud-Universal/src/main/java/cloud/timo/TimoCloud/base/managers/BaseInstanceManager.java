@@ -247,7 +247,7 @@ public class BaseInstanceManager {
                             " -Dtimocloud-static=" + server.isStatic() +
                             " -Dtimocloud-templatedirectory=" + templateDirectory.getAbsolutePath() +
                             " -Dtimocloud-temporarydirectory=" + temporaryDirectory.getAbsolutePath() +
-                            (server.getGroup().equals("GAME-SKYBLOCK") ? " -javaagent:/home/akardoo/slimeworldmanager-classmodifier.jar ":"") +
+                            (server.getGroup().equals("GAME-SKYBLOCK") || server.getGroup().equals("LOBBY-SKYBLOCK") ? " -javaagent:/home/akardoo/slimeworldmanager-classmodifier.jar ":"") +
                             " -classpath \"/home/akardoo/paperclip.jar:/home/akardoo/lib/*\" io.papermc.paperclip.Paperclip -o false -h 0.0.0.0 -p " + port
             ).directory(temporaryDirectory);
             try {
