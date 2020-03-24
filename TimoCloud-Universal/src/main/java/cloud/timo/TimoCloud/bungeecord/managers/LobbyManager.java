@@ -71,10 +71,14 @@ public class LobbyManager {
         List<String> history = getVisitedLobbies(uuid);
 
         for (ServerObject server : servers) {
-            if (history.contains(server.getName()) && ! removeServers.contains(server)) removeServers.add(server);
+            if (history.contains(server.getName()) && !removeServers.contains(server)) {
+                System.out.println("SERVER TO REMOVE: " + server.getName() + " - " + server.getOnlinePlayerCount() + "/" + server.getMaxPlayerCount());
+                removeServers.add(server);
+            }
         }
         servers.removeAll(removeServers);
         if (servers.size() == 0) {
+            System.out.println("0 LOBBIES FOUND");
             return null;
         }
 
@@ -107,6 +111,7 @@ public class LobbyManager {
 
         ServerInfo serverInfo = searchFreeLobby(uuid, notThis);
         if (serverInfo == null) {
+            System.out.println("SEARCH FREE LOBBY NULL");
             return TimoCloudBungee.getInstance().getProxy().getServerInfo(TimoCloudBungee.getInstance().getFileManager().getConfig().getString("emergencyFallback"));
         }
 
